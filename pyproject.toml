@@ -1,19 +1,25 @@
-[build-system]
-requires = ["setuptools>=45", "wheel", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "agent-core-framework"
 version = "0.1.0"
-description = "Framework core para sistemas multi-agente con LangChain"
-authors = [{name = "Tu Nombre", email = "tu@email.com"}]
+description = "Core framework for multi-agent systems"
+authors = [{name = "Manolo Salsas", email = "manolez@gmail.com"}]
 license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.8"
+keywords = ["ai", "agents", "multi-agent", "langchain"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
 dependencies = [
     "pydantic>=2.0.0",
-    "langchain>=0.1.0",
-    "typing-extensions>=4.0.0"
+    "typing-extensions>=4.0.0",
 ]
 
 [project.optional-dependencies]
@@ -21,15 +27,20 @@ dev = [
     "pytest>=7.0.0",
     "black>=23.0.0",
     "isort>=5.12.0",
-    "mypy>=1.0.0"
+    "mypy>=1.0.0",
 ]
+langchain = [
+    "langchain>=0.1.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/msalsas/agent-core-framework"
+"Repository" = "https://github.com/msalsas/agent-core-framework"
+"Bug Reports" = "https://github.com/msalsas/agent-core-framework/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.setuptools.package-data]
-"*" = ["py.typed"]
-
-[project.urls]
-"Homepage" = "https://github.com/tu-usuario/agent-core-framework"
-"Repository" = "https://github.com/tu-usuario/agent-core-framework"
+[tool.black]
+line-length = 88
+target-version = ['py38']
