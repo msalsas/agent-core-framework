@@ -11,6 +11,12 @@ A small, extensible package to register, orchestrate and implement agents that p
 - Extension points to integrate LLMs (for example, via LangChain adapters).
 - Unit tests included for core components.
 
+## Project information
+
+- Package name: `agent-core-framework`
+- Current version: `0.1.0`
+- Dependencies and metadata are declared in `pyproject.toml`.
+
 ## Installation
 
 Install from PyPI:
@@ -96,11 +102,66 @@ If your workflow uses another tool (pip-tools, pipx, tox, etc.), use the corresp
 
 (There are tests in the `tests/` folder — run `pytest` to check them.)
 
+## Publishing to PyPI (GitHub Actions + local)
+
+This repository already includes a GitHub Actions workflow at `.github/workflows/publish.yml` that builds distributions and publishes to PyPI when a git tag matching `v*.*.*` is pushed (for example `v0.1.0`). The workflow expects a repository secret named `PYPI_API_TOKEN` containing a PyPI API token.
+
+Quick notes:
+
+- Workflow trigger: push a tag like `v0.1.0`.
+- GitHub action: `pypa/gh-action-pypi-publish@release/v1` uploads using username `__token__` and the token as the password.
+- Dependencies for build are taken from `pyproject.toml` and the action installs `build` and `twine`.
+
+You mentioned you already created and set the secret with `gh secret set PYPI_API_TOKEN --body "..."`. Good — with that in place you can publish by creating and pushing a tag.
+
+To publish (create tag and push):
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+After the push the workflow will run and, if successful, upload the package to PyPI and create a GitHub Release.
+
+Local test publish (recommended first on TestPyPI):
+
+1. Build the distributions locally:
+
+```bash
+python -m pip install --upgrade build twine
+python -m build
+```
+
+2. Upload to TestPyPI (use the token you created on https://test.pypi.org if you created one there):
+
+```bash
+python -m twine upload --repository testpypi -u __token__ -p "pypi-XXXXXXXXXXXXXXXXXXXX" dist/*
+```
+
+3. Upload to real PyPI (use your real PyPI token and be careful — this publishes publicly):
+
+```bash
+python -m twine upload -u __token__ -p "pypi-XXXXXXXXXXXXXXXXXXXX" dist/*
+```
+
+Notes:
+
+- When using `twine`, the username must be exactly `__token__` and the token value serves as the password.
+- TestPyPI tokens are different from PyPI tokens.
+
+If you prefer not to paste tokens on the command line, set `TWINE_PASSWORD` or use a `.pypirc` file with the token (but never commit secrets).
+
+Troubleshooting common issues:
+
+- 403 Unauthorized: verify you're using the correct token for the correct server (TestPyPI vs PyPI) and that the token has the right scope.
+- Workflow didn't run: confirm you pushed a tag (not just a commit) and that the tag follows `vX.Y.Z` format.
+- Invalid project name when creating a scoped token: ensure the name you used on PyPI matches `name` in `pyproject.toml` exactly (`agent-core-framework`).
+
 ## Best practices
 
-- Wrap errors in `AgentResponse` so the orchestrator can handle failures.
-- Keep `process` as deterministic as possible; extract I/O calls to make testing easier.
-- Add unit tests when you add agents or critical logic.
+- Limit the token scope to the project when possible and rotate tokens periodically.
+- Keep tokens in GitHub Secrets or a password manager — never commit them.
+- Use TestPyPI to validate uploads before pushing to the real PyPI.
 
 ## Contributing
 
