@@ -17,8 +17,9 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install build dependencies
-        run: python -m pip install --upgrade build twine
+      - name: Upgrade pip and build tools
+        run: |
+          python -m pip install --upgrade pip setuptools wheel build twine
 
       - name: Build distribution
         run: python -m build
@@ -28,4 +29,3 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
-
