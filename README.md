@@ -19,7 +19,7 @@ A small, extensible package to register, orchestrate and implement agents that p
 ## Project information
 
 - Package name: `agent-core-framework`
-- Current version: `0.1.1`
+- Current version: `0.1.5`
 - Dependencies and metadata are declared in `pyproject.toml`.
 
 ## Installation
