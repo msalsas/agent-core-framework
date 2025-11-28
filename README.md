@@ -1,5 +1,10 @@
 # Agent Core Framework
 
+[![PyPI](https://img.shields.io/pypi/v/agent-core-framework.svg)](https://pypi.org/project/agent-core-framework/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/agent-core-framework.svg)](https://pypi.org/project/agent-core-framework/)
+[![CI](https://github.com/msalsas/agent-core-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/msalsas/agent-core-framework/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/msalsas/agent-core-framework.svg)](https://github.com/msalsas/agent-core-framework/blob/main/LICENSE)
+
 Lightweight framework for multi-agent systems with optional LangChain support.
 
 A small, extensible package to register, orchestrate and implement agents that process tasks in a coordinated way.
