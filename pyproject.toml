@@ -1,50 +1,7 @@
-[project]
-name = "agent-core-framework"
-version = "0.1.1"
-description = "Core framework for multi-agent systems"
-authors = [{name = "Manolo Salsas", email = "manolez@gmail.com"}]
-license = { text = "MIT" }
-license-files = ["LICENSE"]
-readme = "README.md"
-requires-python = ">=3.8"
-keywords = ["ai", "agents", "multi-agent", "langchain"]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-]
-dependencies = [
-    "pydantic>=2.0.0",
-    "typing-extensions>=4.0.0",
-]
-
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.0.0",
-    "black>=23.0.0",
-    "isort>=5.12.0",
-    "mypy>=1.0.0",
-]
-langchain = [
-    "langchain>=0.1.0",
-]
-
-[project.urls]
-"Homepage" = "https://github.com/msalsas/agent-core-framework"
-"Repository" = "https://github.com/msalsas/agent-core-framework"
-"Bug Reports" = "https://github.com/msalsas/agent-core-framework/issues"
-
-[tool.setuptools.packages.find]
-where = ["src"]
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [tool.black]
 line-length = 88
 target-version = ['py38']
-
-[build-system]
-requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.build_meta"
